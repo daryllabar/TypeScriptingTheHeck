@@ -1,0 +1,82 @@
+npm install -g typescript
+nuget.exe install Delegate.XrmDefinitelyTyped -OutputDirectory ..\packages
+nuget.exe install XDT.PostProcessor -OutputDirectory ..\packages
+npm init -y
+
+npm install --save-dev eslint eslint-config-prettier eslint-plugin-prettier jest prettier ts-jest ts-loader webpack webpack-cli webpack-merge xrm-mock xdt-formext @types/jest @types/xrm @typescript-eslint/eslint-plugin @typescript-eslint/parser
+
+npx tsc --init
+"target": "ES2024",
+"outDir": "./WebResources/heck_/js", 
+},
+"include": ["src/**/*", "typings/**/*"]
+
+npx eslint --init
+import js from "@eslint/js";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
+import prettierConfig from "eslint-config-prettier";
+import prettierPlugin from "eslint-plugin-prettier";
+
+export default defineConfig([
+    {
+        ignores: [
+            "jest.config.js",
+            "node_modules/**/*",
+            "webpack.*",
+            "src/lib/*",
+            "typings/**/*",
+            "WebResources/**/*",
+        ],
+    },
+    { files: ["**/*.{js,mjs,cjs,ts}"], plugins: { js }, extends: ["js/recommended"] },
+    { files: ["**/*.{js,mjs,cjs,ts}"], languageOptions: { globals: globals.browser } },
+    js.configs.recommended,
+    tseslint.configs.recommended,
+    prettierConfig,
+    {
+        plugins: { prettier: prettierPlugin },
+        rules: {
+            "prettier/prettier": [
+                "error",
+                {
+                    endOfLine: "auto",
+                    printWidth: 120,
+                    semi: true,
+                    singleQuote: false,
+                    tabWidth: 4,
+                    trailingComma: "all",
+                },
+            ],
+        },
+    },
+    {
+        rules: {
+            "@typescript-eslint/no-explicit-any": "off", // Disable the no-explicit-any rule
+        },
+    },
+]);
+
+copy "G:\My Drive\CRM\TypeScripting The Heck Files\XrmDefinitelyTyped.exe.config" "..\packages\Delegate.XrmDefinitelyTyped.6.6.0\content\XrmDefinitelyTyped"
+
+..\packages\Delegate.XrmDefinitelyTyped.6.6.0\content\XrmDefinitelyTyped\XrmDefinitelyTyped.exe
+..\packages\Xdt.PostProcessor.1.0.0.16\content\XDT.PostProcessor\XDT.PostProcessor.exe .\typings\Xdt .\Src\lib 
+
+mkdir src\form, src\__tests__\form -Force; copy "G:\My Drive\CRM\TypeScripting The Heck Files\base.ts" ".\src\form\base.ts"; copy "G:\My Drive\CRM\TypeScripting The Heck Files\account.ts" ".\src\form\account.ts"; copy "G:\My Drive\CRM\TypeScripting The Heck Files\account.spec.ts" ".\src\__tests__\form\account.spec.ts";
+
+copy "G:\My Drive\CRM\TypeScripting The Heck Files\jest.config.js" ".\jest.config.js"
+npx jest
+
+copy "G:\My Drive\CRM\TypeScripting The Heck Files\webpack.config.*" ".\"
+
+  "scripts": {
+    "format": "prettier ./src/**/*.ts --write",
+    "lint": "eslint ./src/**/*.ts --fix",
+    "regen": ".\\..\\packages\\Delegate.XrmDefinitelyTyped.6.6.0\\content\\XrmDefinitelyTyped\\XrmDefinitelyTyped.exe && .\\..\\packages\\Xdt.PostProcessor.1.0.0.16\\content\\XDT.PostProcessor\\XDT.PostProcessor.exe .\\typings\\Xdt .\\Src\\lib",
+    "test": "jest",
+    "test-watch": "jest --watchAll --maxWorkers=25% --detectOpenHandles",
+    "build-dev": "webpack --config webpack.config.dev.js",
+    "build": "webpack --config webpack.config.prod.js",
+    "startServer-dev": "webpack serve --config webpack.config.dev --hot"
+  },
